@@ -123,7 +123,6 @@ let fengNiao = FengNiao(projectPath: projectPath,
 
 let unusedFiles: [FileInfo]
 do {
-    print("Searching unused file. This may take a while...")
     unusedFiles = try fengNiao.unusedFiles()
 } catch {
     guard let e = error as? FengNiaoError else {
@@ -145,7 +144,7 @@ if unusedFiles.isEmpty {
 }
 
 let size = unusedFiles.reduce(0) { $0 + $1.size }.fn_readableSize
-print("\(unusedFiles.count) unused files are found. Total Size: \(size)".yellow.bold)
+print("unused resources count: \(unusedFiles.count). Total Size: \(size)".yellow.bold)
 
 for file in unusedFiles.sorted(by: { $0.size > $1.size }) {
     print("\(file.readableSize) \(file.path.string)")
